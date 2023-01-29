@@ -26,9 +26,12 @@ class _MobileLoginPageState extends State<MobileLoginPage> {
         NavigationDelegate(
           onPageFinished: (url) async {
             _title = await _controller.getTitle() ?? '登录';
+            setState(() {});
           },
         ),
       )
+      // ..enableZoom(true)
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..loadRequest(Uri.https('user.mihoyo.com'));
   }
 
@@ -40,6 +43,7 @@ class _MobileLoginPageState extends State<MobileLoginPage> {
       ),
       body: SafeArea(
         child: Column(
+          mainAxisSize: MainAxisSize.max,
           children: [
             Expanded(
               child: WebViewWidget(
@@ -80,13 +84,24 @@ class _MobileLoginPageState extends State<MobileLoginPage> {
                   onPressed: () async {
                     final cookie = await _controller
                         .runJavaScriptReturningResult('document.cookie');
-
-                    final ce = CookieEntity.fromCookieString(cookie.toString());
-                    print(ce);
+                    final cs = cookie.toString();
+                    final ce = CookieEntity.fromCookieString(
+                      cs.substring(1, cs.length - 1),
+                    );
+                    print('原cookie: $cookie');
+                    print('获取到cookie: $ce');
                     if (!mounted) return;
                     Navigator.of(context).pop(ce);
                   },
                   child: const Text('获取Cookie'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    _controller.loadRequest(
+                      Uri.parse('https://user.mihoyo.com/'),
+                    );
+                  },
+                  child: Text('刷新'),
                 ),
               ],
             ),
