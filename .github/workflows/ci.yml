@@ -37,28 +37,27 @@ jobs:
           name: ${{ env.BRANCH_NAME }}-${{ env.SHA }}-app-x86_64-release.apk
           path: build/app/outputs/flutter-apk/app-x86_64-release.apk
 
-  # build-Windows:
-  #   runs-on: windows-latest
-  #   steps:
-  #     - uses: nelonoel/branch-name@v1.0.1
-  #     - uses: benjlevesque/short-sha@v1.2
-  #       id: short-sha
-  #       with: { length: 7 }
+  build-Windows:
+    runs-on: windows-latest
+    steps:
+      - uses: nelonoel/branch-name@v1.0.1
+      - uses: benjlevesque/short-sha@v1.2
+        id: short-sha
+        with: { length: 7 }
 
-  #     - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-  #     - uses: subosito/flutter-action@v2
-  #       with: { channel: stable, cache: true }
+      - uses: subosito/flutter-action@v2
+        with: { channel: stable, cache: true }
 
-  #     - run: |
-  #         flutter config --enable-windows-desktop
-  #         flutter pub get
-  #         flutter build windows
-  #     - name: Upload Windows build file
-  #       uses: actions/upload-artifact@v3
-  #       with:
-  #         name: ${{ env.BRANCH_NAME }}-${{ env.SHA }}-windows-x86_64.zip
-  #         path: build/windows/runner/Release
+      - run: |
+          flutter pub get
+          flutter build windows
+      - name: Upload Windows build file
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.BRANCH_NAME }}-${{ env.SHA }}-windows-x86_64.zip
+          path: build/windows/runner/Release
 
   # build-Linux:
   #   runs-on: ubuntu-latest
