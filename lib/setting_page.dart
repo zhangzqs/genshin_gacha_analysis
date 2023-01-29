@@ -28,7 +28,6 @@ Future<String?> inputText(
               ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).pop(controller.text);
-                  controller.dispose();
                 },
                 child: const Text('确认修改'),
               ),

@@ -84,7 +84,9 @@ class _HomePageState extends State<HomePage> {
           ListTile(
             leading: const Icon(Icons.history),
             title: const Text('查看抽卡记录'),
-            onTap: () {},
+            onTap: () {
+              EasyLoading.showError('敬请期待');
+            },
           ),
           ListTile(
             leading: const Icon(Icons.abc),
@@ -111,7 +113,8 @@ class _HomePageState extends State<HomePage> {
               final service = GlobalObjects.mhyService;
               try {
                 Uri uri = await service.getGachaUrl();
-                showDialog(
+                if (!mounted) return;
+                await showDialog(
                   context: context,
                   builder: (context) {
                     return Dialog(
@@ -122,6 +125,7 @@ class _HomePageState extends State<HomePage> {
                             '成功取得抽卡地址',
                             style: Theme.of(context).textTheme.titleLarge,
                           ),
+                          TextFormField(initialValue: uri.toString()),
                           ElevatedButton(
                             onPressed: () async {
                               await Clipboard.setData(ClipboardData(
@@ -134,7 +138,9 @@ class _HomePageState extends State<HomePage> {
                             child: const Text('复制到剪切板'),
                           ),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
                             child: const Text('取消'),
                           ),
                         ],
