@@ -101,8 +101,6 @@ jobs:
 
       - name: Download artifacts File
         uses: actions/download-artifact@v3
-        with:
-          path: ~/artifacts
 
       - name: Release
         uses: softprops/action-gh-release@v1
@@ -110,8 +108,8 @@ jobs:
           draft: true
           generate_release_notes: true
           files: |
-            ~/artifacts/${{ env.BRANCH_NAME }}-${{ env.SHA }}-linux-x86_64.zip
-            ~/artifacts/${{ env.BRANCH_NAME }}-${{ env.SHA }}-app-armeabi-v7a-release.apk
-            ~/artifacts/${{ env.BRANCH_NAME }}-${{ env.SHA }}-app-arm64-v8a-release.apk
-            ~/artifacts/${{ env.BRANCH_NAME }}-${{ env.SHA }}-app-x86_64-release.apk
-            ~/artifacts/${{ env.BRANCH_NAME }}-${{ env.SHA }}-windows-x86_64.zip
+            ${{ env.BRANCH_NAME }}-${{ env.SHA }}-linux-x86_64.zip
+            ${{ env.BRANCH_NAME }}-${{ env.SHA }}-app-armeabi-v7a-release.apk
+            ${{ env.BRANCH_NAME }}-${{ env.SHA }}-app-arm64-v8a-release.apk
+            ${{ env.BRANCH_NAME }}-${{ env.SHA }}-app-x86_64-release.apk
+            ${{ env.BRANCH_NAME }}-${{ env.SHA }}-windows-x86_64.zip
