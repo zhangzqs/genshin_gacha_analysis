@@ -1,6 +1,7 @@
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
+import 'package:genshin_wish_analysis/service/gacha_service.dart';
 import 'package:genshin_wish_analysis/service/mhy_service.dart';
 import 'package:genshin_wish_analysis/storage/index.dart';
 import 'package:genshin_wish_analysis/util/hive_cookie_jar.dart';
@@ -12,7 +13,7 @@ class GlobalObjects {
   static late final CookieJar cookieJar;
   static late final KvStorage kv;
   static late final MHYService mhyService;
-
+  static late final GachaService gachaService;
   static late final Logger logger;
 
   static Future<void> init() async {
@@ -33,6 +34,8 @@ class GlobalObjects {
     kv = KvStorage(await Hive.openBox('kv'));
 
     mhyService = MHYService(dio: dio, cookieJar: cookieJar);
+
+    gachaService = GachaService(dio);
 
     logger = Logger(printer: PrettyPrinter());
   }

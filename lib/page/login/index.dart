@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:genshin_wish_analysis/login/desktop_login.dart';
-import 'package:genshin_wish_analysis/login/mobile_login.dart';
+import 'package:genshin_wish_analysis/page/login/desktop_login.dart';
+import 'package:genshin_wish_analysis/page/login/mobile_login.dart';
 import 'package:universal_platform/universal_platform.dart';
 
 import 'cookie_entity.dart';

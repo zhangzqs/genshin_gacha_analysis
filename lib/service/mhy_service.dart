@@ -9,7 +9,7 @@ import 'package:genshin_wish_analysis/global.dart';
 
 import 'gacha_type_enum.dart';
 
-late final _log = GlobalObjects.logger;
+final _log = GlobalObjects.logger;
 
 class LoginByCookieResponse {
   String accountId;
@@ -49,8 +49,7 @@ class MHYService {
   LoginByCookieResponse? _loginByCookieResponse;
   bool _getMultiTokenByLoginTicketFinished = false;
 
-  Map<String, GetUserGameRolesByCookieResponseItem>?
-      _getUserGameRolesByCookieResponse;
+  Map<String, GetUserGameRolesByCookieResponseItem>? _getUserGameRolesByCookieResponse;
 
   Map<String, String>? _authKeyMap;
 
@@ -137,8 +136,7 @@ class MHYService {
   }
 
   /// 获取用户的游戏角色
-  Future<Map<String, GetUserGameRolesByCookieResponseItem>>
-      getUserGameRolesByCookie() async {
+  Future<Map<String, GetUserGameRolesByCookieResponseItem>> getUserGameRolesByCookie() async {
     if (_getUserGameRolesByCookieResponse != null) {
       return _getUserGameRolesByCookieResponse!;
     }
@@ -224,7 +222,7 @@ class MHYService {
   Future<Uri> getGachaUrl({
     String? gameUid,
     GachaType gachaType = GachaType.permanent,
-    int endId = 0,
+    String endId = '0',
     int page = 1,
     int size = 20,
     String gameVersion = 'CNRELiOS3.0.0_R10283122_S10446836_D10316937',
@@ -264,9 +262,10 @@ class MHYService {
         "timestamp": timestamp.toString(),
         "gacha_type": gachaType.gachaTypeId.toString(),
         "page": page.toString(),
-        "end_id": endId.toString(),
+        "end_id": endId,
       },
     );
+    _log.d(uri);
     return uri;
   }
 }

@@ -18,4 +18,13 @@ enum GachaType {
 
   final int gachaTypeId;
   final String description;
+
+  factory GachaType.fromId(int id) {
+    return {
+      301: GachaType.limitedTimeCharacter,
+      302: GachaType.limitedTimeWeapon,
+      200: GachaType.permanent,
+      100: GachaType.novice,
+    }[id]!;
+  }
 }

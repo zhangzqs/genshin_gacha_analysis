@@ -49,6 +49,7 @@ dependencies:
   universal_platform: ^1.0.0+1
   logger: ^1.1.0
   webview_flutter: ^4.0.2
+  intl: ^0.18.0
 
 dev_dependencies:
   flutter_test:
