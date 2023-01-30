@@ -1,16 +1,21 @@
 # genshin_wish_analysis
 
-A new Flutter project.
+## 简介
 
-## Getting Started
+Flutter编写的国内官服的原神抽卡祈愿分析工具，可无需进行繁琐的抓包获取url，app内直接进行网页登录即可获取抽卡地址。目前暂时只支持获取地址，可自行复制到小程序进行抽卡分析。
 
-This project is a starting point for a Flutter application.
+## 后续计划
 
-A few resources to get you started if this is your first Flutter project:
+后续计划添加app内直接进行抽卡分析。
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 使用方法
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+点击“测试本地cookie是否有效”
+
+若成功则可直接获取祈愿地址，否则请点击“登录米哈游账号”。
+
+点击“登录米哈游账号”，请在网页内完成账号的登录，若本地设置中设置了用户名密码，则可点击“快速登录”按钮进行自动填充快速登录。
+
+若登录成功，请点击“获取Cookie”按钮，即可成功得到登录态。
+
+登录完毕之后，返回首页再次点击“测试cookie是否有效”，若提示有效，则可直接点击”获取祈愿地址“进行url的获取。
