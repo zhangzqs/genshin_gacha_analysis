@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:genshin_wish_analysis/global.dart';
+import 'package:genshin_wish_analysis/page/card/index.dart';
 import 'package:genshin_wish_analysis/page/login/index.dart';
 import 'package:genshin_wish_analysis/service/gacha_type_enum.dart';
 import 'package:genshin_wish_analysis/service/mhy_service.dart';
@@ -153,16 +154,9 @@ class _HomePageState extends State<HomePage> {
             leading: const Icon(Icons.history),
             title: const Text('查看抽卡记录'),
             onTap: () async {
-              final dio = GlobalObjects.dio;
-              final mhy = GlobalObjects.mhyService;
-              final gacha = GlobalObjects.gachaService;
-              final uri = await mhy.getGachaUrl(
-                gachaType: GachaType.limitedTimeCharacter,
-                page: 2,
-                endId: '0',
-              );
-
-              _log.d(await gacha.fetch(uri));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                return const GachaHistoryView();
+              }));
             },
           ),
           ListTile(
