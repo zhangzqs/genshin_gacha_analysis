@@ -20,23 +20,38 @@ jobs:
       - name: 🏗️ Build Apk (arm64,android-x64)
         run: flutter build apk --split-per-abi --target-platform android-arm64,android-x64,android-arm --release
 
+      - name: Sign APK
+        uses: r0adkll/sign-android-release@v1
+        with:
+          releaseDirectory: build/app/outputs/flutter-apk
+          signingKeyBase64: ${{ secrets.APK_SIGN_JKS_BASE64 }}
+          alias: ${{ secrets.APK_SIGN_ALIAS }}
+          keyStorePassword: ${{ secrets.APK_SIGN_PASS }}
+
+      - name: Rename APK
+        run: |
+          cd build/app/outputs/flutter-apk/
+          mv app-armeabi-v7a-release-signed.apk genshin-wish-${{ env.BRANCH_NAME }}-${{ env.SHA }}-armeabi-v7a-release-signed.apk
+          mv app-arm64-v8a-release-signed.apk genshin-wish-${{ env.BRANCH_NAME }}-${{ env.SHA }}-arm64-v8a-release-signed.apk
+          mv app-x86_64-release-signed.apk genshin-wish-${{ env.BRANCH_NAME }}-${{ env.SHA }}-x86_64-release-signed.apk
+
       - name: Upload armeabi-v7a apk artifact File
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ env.BRANCH_NAME }}-${{ env.SHA }}-app-armeabi-v7a-release.apk
-          path: build/app/outputs/flutter-apk/app-armeabi-v7a-release.apk
+          name: genshin-wish-${{ env.BRANCH_NAME }}-${{ env.SHA }}-app-armeabi-v7a-release-signed.apk
+          path: build/app/outputs/flutter-apk/genshin-wish-${{ env.BRANCH_NAME }}-${{ env.SHA }}-armeabi-v7a-release-signed.apk
 
       - name: Upload arm64-v8a apk artifact File
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ env.BRANCH_NAME }}-${{ env.SHA }}-app-arm64-v8a-release.apk
-          path: build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
+          name: genshin-wish-${{ env.BRANCH_NAME }}-${{ env.SHA }}-app-arm64-v8a-release-signed.apk
+          path: build/app/outputs/flutter-apk/genshin-wish-${{ env.BRANCH_NAME }}-${{ env.SHA }}-arm64-v8a-release-signed.apk
 
       - name: Upload x86_64 apk artifact File
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ env.BRANCH_NAME }}-${{ env.SHA }}-app-x86_64-release.apk
-          path: build/app/outputs/flutter-apk/app-x86_64-release.apk
+          name: genshin-wish-${{ env.BRANCH_NAME }}-${{ env.SHA }}-app-x86_64-release-signed.apk
+          path: build/app/outputs/flutter-apk/genshin-wish-${{ env.BRANCH_NAME }}-${{ env.SHA }}-x86_64-release-signed.apk
 
   build-Windows:
     runs-on: windows-latest
