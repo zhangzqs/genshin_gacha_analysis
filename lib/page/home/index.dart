@@ -20,7 +20,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   Future<void> login() async {
-    final account = GlobalObjects.kv.account;
+    final account = GlobalObjects.appData.account;
     final cookieJar = GlobalObjects.cookieJar;
 
     final cookieEntity = await loginGetCookie(

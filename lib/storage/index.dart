@@ -1,8 +1,12 @@
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:genshin_wish_analysis/util/kv_storage.dart';
 
 import 'account.dart';
 
-class KvStorage {
-  final AccountStorage account;
-  KvStorage(Box box) : account = AccountStorage(box);
+class AppKvStorage {
+  final KvStorage kvStorage;
+  late final AccountStorage account = AccountStorage(KvStorageWithNamespace(
+    source: kvStorage,
+    namespace: 'account',
+  ));
+  AppKvStorage(this.kvStorage);
 }

@@ -1,42 +1,39 @@
+import 'dart:io';
+
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:genshin_wish_analysis/service/gacha_service.dart';
 import 'package:genshin_wish_analysis/service/mhy_service.dart';
 import 'package:genshin_wish_analysis/storage/index.dart';
-import 'package:genshin_wish_analysis/util/hive_cookie_jar.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:genshin_wish_analysis/util/kv_storage.dart';
+import 'package:genshin_wish_analysis/util/kv_storage_cookie_jar.dart';
 import 'package:logger/logger.dart';
 
 class GlobalObjects {
-  static late final Dio dio;
-  static late final CookieJar cookieJar;
-  static late final KvStorage kv;
-  static late final MHYService mhyService;
-  static late final GachaService gachaService;
-  static late final Logger logger;
-
-  static Future<void> init() async {
-    dio = Dio(BaseOptions(
+  static final Dio dio = () {
+    final dio = Dio(BaseOptions(
       connectTimeout: 2000,
       sendTimeout: 2000,
       receiveTimeout: 2000,
     ));
-
-    await Hive.initFlutter('hive_boxes');
-
-    cookieJar = PersistCookieJar(
-      storage: HiveCookieJar(await Hive.openBox('cookie')),
-    );
-
     dio.interceptors.add(CookieManager(cookieJar));
-
-    kv = KvStorage(await Hive.openBox('kv'));
-
-    mhyService = MHYService(dio: dio, cookieJar: cookieJar);
-
-    gachaService = GachaService(dio);
-
-    logger = Logger(printer: PrettyPrinter());
-  }
+    return dio;
+  }();
+  static final CookieJar cookieJar = PersistCookieJar(
+    storage: KvStorageCookieJar(
+      KvStorageWithNamespace(
+        source: kv,
+        namespace: "cookie",
+      ),
+    ),
+  );
+  static final KvStorage kv = KvStorageJsonFileImpl(File("kv.json"));
+  static final AppKvStorage appData = AppKvStorage(kv);
+  static final MHYService mhyService = MHYService(
+    dio: dio,
+    cookieJar: cookieJar,
+  );
+  static final GachaService gachaService = GachaService(dio);
+  static final Logger logger = Logger(printer: PrettyPrinter());
 }

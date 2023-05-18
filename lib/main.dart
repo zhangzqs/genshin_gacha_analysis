@@ -4,10 +4,9 @@ import 'package:genshin_wish_analysis/app.dart';
 import 'package:genshin_wish_analysis/global.dart';
 import 'package:universal_platform/universal_platform.dart';
 
-Future<void> main(List<String> args) async {
+void main(List<String> args) {
   WidgetsFlutterBinding.ensureInitialized();
   if (UniversalPlatform.isDesktop && runWebViewTitleBarWidget(args)) return;
-  await GlobalObjects.init();
 
   runApp(const GenshinWishAnalysisApp());
 }

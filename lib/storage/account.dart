@@ -1,16 +1,15 @@
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:genshin_wish_analysis/util/kv_storage.dart';
 
 class AccountStorage {
-  static const _keyNamespace = '/account';
-  static const usernameKey = '$_keyNamespace/username';
-  static const passwordKey = '$_keyNamespace/password';
+  static const usernameKey = 'username';
+  static const passwordKey = 'password';
 
-  final Box box;
-  const AccountStorage(this.box);
+  final KvStorage kv;
+  const AccountStorage(this.kv);
 
-  String? get username => box.get(usernameKey);
-  String? get password => box.get(passwordKey);
+  String? get username => kv.get<String>(usernameKey);
+  String? get password => kv.get<String>(passwordKey);
 
-  set username(String? v) => box.put(usernameKey, v);
-  set password(String? v) => box.put(passwordKey, v);
+  set username(String? v) => kv.set(usernameKey, v);
+  set password(String? v) => kv.set(passwordKey, v);
 }

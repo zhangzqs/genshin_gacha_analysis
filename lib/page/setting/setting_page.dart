@@ -53,7 +53,7 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
-  final account = GlobalObjects.kv.account;
+  final account = GlobalObjects.appData.account;
 
   String? username;
   String? password;
