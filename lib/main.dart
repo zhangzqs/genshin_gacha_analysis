@@ -6,7 +6,8 @@ import 'package:universal_platform/universal_platform.dart';
 
 void main(List<String> args) {
   WidgetsFlutterBinding.ensureInitialized();
-  if (UniversalPlatform.isDesktop && runWebViewTitleBarWidget(args)) return;
-
+  if (UniversalPlatform.isDesktop && runWebViewTitleBarWidget(args)) {
+    return;
+  }
   runApp(const GenshinWishAnalysisApp());
 }

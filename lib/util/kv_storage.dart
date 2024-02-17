@@ -144,12 +144,20 @@ class KvStorageJsonImpl extends KvStorage {
   final void Function(String json)? onJsonChanged;
 
   KvStorageJsonImpl({
+    String initialData = '{}',
     this.onJsonChanged,
-  });
+  }) {
+    data.addAll(jsonDecode(initialData));
+  }
+
+  String toJson() {
+    return const JsonEncoder.withIndent('  ').convert(data);
+  }
+
   @override
   void clear() {
     source.clear();
-    onJsonChanged?.call(jsonEncode(data));
+    onJsonChanged?.call(toJson());
   }
 
   @override
@@ -160,7 +168,7 @@ class KvStorageJsonImpl extends KvStorage {
   @override
   void set<T>(String key, T? value) {
     source.set(key, value);
-    onJsonChanged?.call(jsonEncode(data));
+    onJsonChanged?.call(toJson());
   }
 
   @override
@@ -171,7 +179,11 @@ class KvStorageJsonImpl extends KvStorage {
 
 class KvStorageJsonFileImpl extends KvStorageJsonImpl {
   KvStorageJsonFileImpl(File jsonFile)
-      : super(onJsonChanged: (json) {
-          jsonFile.writeAsStringSync(json);
-        });
+      : super(
+          initialData:
+              jsonFile.existsSync() ? jsonFile.readAsStringSync() : '{}',
+          onJsonChanged: (json) {
+            jsonFile.writeAsStringSync(json);
+          },
+        );
 }
