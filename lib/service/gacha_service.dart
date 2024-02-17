@@ -66,7 +66,8 @@ class GachaRecordEntity {
     required this.rank,
   });
 
-  factory GachaRecordEntity.fromGachaUrlResponseJson(Map<String, dynamic> json) {
+  factory GachaRecordEntity.fromGachaUrlResponseJson(
+      Map<String, dynamic> json) {
     return GachaRecordEntity(
       uid: json['uid']!,
       gachaType: GachaType.fromId(int.parse(json['gacha_type']!)),

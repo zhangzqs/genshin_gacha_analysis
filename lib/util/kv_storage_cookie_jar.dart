@@ -10,15 +10,22 @@ class KvStorageCookieJar implements Storage {
   Future<void> init(bool persistSession, bool ignoreExpires) async {}
 
   @override
-  Future<void> write(String key, String value) async =>
-      kvStorage.set(key, value);
+  Future<void> write(String key, String value) async {
+    kvStorage.set(key, value);
+  }
 
   @override
-  Future<String?> read(String key) async => kvStorage.get(key);
+  Future<String?> read(String key) async {
+    return kvStorage.get(key);
+  }
 
   @override
   Future<void> delete(String key) async => kvStorage.set(key, null);
 
   @override
-  Future<void> deleteAll(List<String> keys) async => kvStorage.clear();
+  Future<void> deleteAll(List<String> keys) async {
+    for (final e in keys) {
+      kvStorage.set(e, null);
+    }
+  }
 }
