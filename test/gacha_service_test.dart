@@ -5,7 +5,7 @@ import 'package:genshin_wish_analysis/service/gacha_type_enum.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await GlobalObjects.init();
+  // await GlobalObjects.init();
   final mhy = GlobalObjects.mhyService;
   final gacha = GlobalObjects.gachaService;
   final log = GlobalObjects.logger;
