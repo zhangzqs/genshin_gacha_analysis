@@ -27,6 +27,8 @@ jobs:
           signingKeyBase64: ${{ secrets.APK_SIGN_JKS_BASE64 }}
           alias: ${{ secrets.APK_SIGN_ALIAS }}
           keyStorePassword: ${{ secrets.APK_SIGN_PASS }}
+        env:
+          BUILD_TOOLS_VERSION: "30.0.3"
 
       - name: Rename APK
         run: |
