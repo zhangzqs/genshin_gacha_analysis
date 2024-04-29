@@ -24,6 +24,9 @@ dependencies:
   logger: ^1.1.0
   webview_flutter: ^4.0.2
   intl: ^0.18.0
+  nfc_manager: ^3.4.0
+  url_launcher: ^6.2.5
+  external_app_launcher: ^4.0.0
 
 dev_dependencies:
   flutter_test:

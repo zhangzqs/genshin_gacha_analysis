@@ -101,7 +101,7 @@ class _MobileLoginPageState extends State<MobileLoginPage> {
                       Uri.parse('https://user.mihoyo.com/'),
                     );
                   },
-                  child: Text('刷新'),
+                  child: const Text('刷新'),
                 ),
               ],
             ),

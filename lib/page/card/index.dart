@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:genshin_wish_analysis/global.dart';
 import 'package:genshin_wish_analysis/page/card/card_list_view.dart';
 import 'package:genshin_wish_analysis/service/gacha_service.dart';
 import 'package:genshin_wish_analysis/service/gacha_type_enum.dart';
-import 'package:intl/intl.dart';
 
 class GachaHistoryView extends StatefulWidget {
   const GachaHistoryView({super.key});

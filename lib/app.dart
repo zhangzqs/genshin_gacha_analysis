@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:genshin_wish_analysis/page/nfc/index.dart';
 
 import 'global.dart';
 import 'page/home/index.dart';
@@ -20,6 +21,7 @@ class GenshinWishAnalysisApp extends StatelessWidget {
       routes: {
         '/': (ctx) => const HomePage(),
         '/setting': (ctx) => const SettingPage(),
+        '/nfc': (ctx) => const NfcPage(),
       },
       initialRoute: '/',
       builder: EasyLoading.init(),

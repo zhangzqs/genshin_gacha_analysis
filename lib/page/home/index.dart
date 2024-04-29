@@ -6,7 +6,6 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:genshin_wish_analysis/global.dart';
 import 'package:genshin_wish_analysis/page/card/index.dart';
 import 'package:genshin_wish_analysis/page/login/index.dart';
-import 'package:genshin_wish_analysis/service/gacha_type_enum.dart';
 import 'package:genshin_wish_analysis/service/mhy_service.dart';
 
 final _log = GlobalObjects.logger;
@@ -168,7 +167,14 @@ class _HomePageState extends State<HomePage> {
             leading: const Icon(Icons.copy),
             title: const Text('获取祈愿地址'),
             onTap: getUrl,
-          )
+          ),
+          ListTile(
+            leading: const Icon(Icons.launch),
+            title: const Text('NFC'),
+            onTap: () {
+              Navigator.of(context).pushNamed('/nfc');
+            },
+          ),
         ],
       ),
     );
